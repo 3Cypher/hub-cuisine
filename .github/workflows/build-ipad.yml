@@ -3,8 +3,11 @@ name: Compiler Hub Cuisine pour iPad
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
-      - 'HubCuisine_GitHub.zip'
+      - 'BrendonHubCuisine.swiftpm/**'
+      - 'BuildSupport/**'
       - '.github/workflows/build-ipad.yml'
 
 permissions:
@@ -16,7 +19,6 @@ concurrency:
 
 jobs:
   build:
-    if: ${{ github.event.repository.private == false }}
     runs-on: macos-15
     timeout-minutes: 30
 
@@ -24,81 +26,56 @@ jobs:
       HOMEBREW_NO_AUTO_UPDATE: '1'
       HOMEBREW_NO_INSTALL_CLEANUP: '1'
 
-    defaults:
-      run:
-        shell: bash
-        working-directory: build-input/HubCuisine_GitHub
-
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v7
         with:
           persist-credentials: false
 
-      - name: Décompresser Hub Cuisine
-        working-directory: .
-        run: |
-          set -euo pipefail
-
-          test -f HubCuisine_GitHub.zip
-
-          rm -rf build-input
-          mkdir -p build-input
-
-          unzip -q HubCuisine_GitHub.zip -d build-input
-
-          test -f build-input/HubCuisine_GitHub/BuildSupport/project.yml
-
       - name: Préparer Xcode et le projet
+        shell: bash
         run: |
           set -euo pipefail
 
           mkdir -p build
 
-          echo "=== Xcode ==="
           xcodebuild -version
-
-          echo "=== Swift ==="
           xcrun swift --version
 
-          echo "=== XcodeGen ==="
           if ! command -v xcodegen >/dev/null 2>&1; then
             brew install xcodegen
           fi
 
           xcodegen --version
 
-          echo "=== Génération du projet Xcode ==="
           xcodegen generate \
             --spec BuildSupport/project.yml \
             --project BuildSupport
 
-          echo "=== Vérification des fichiers ==="
           plutil -lint \
             BuildSupport/Info.plist \
             BuildSupport/HubCuisine.xcodeproj/project.pbxproj
 
-          echo "=== Préparation des tests ==="
+          /usr/libexec/PlistBuddy \
+            -c "Set :CFBundleVersion ${GITHUB_RUN_NUMBER}" \
+            BuildSupport/Info.plist
+
           python3 BuildSupport/prepare_core_tests.py
 
       - name: Tester la logique métier
-        continue-on-error: true
+        shell: bash
         run: |
           set -euo pipefail
 
-          echo "Les tests Swift sont utiles mais ne doivent pas bloquer la compilation iOS."
-
-          MACOSX_DEPLOYMENT_TARGET=10.15 \
           xcrun swift test \
             --package-path build/CorePackage \
             --jobs 2 \
             2>&1 | tee build/core-tests.log
 
       - name: Compiler Hub Cuisine pour iPhone et iPad
+        shell: bash
         run: |
           set -euo pipefail
-
-          echo "=== Compilation iOS ==="
 
           xcodebuild \
             -project BuildSupport/HubCuisine.xcodeproj \
@@ -113,47 +90,38 @@ jobs:
             build \
             2>&1 | tee build/xcodebuild.log
 
-          echo "=== Recherche de l'application compilée ==="
+          test -d build/DerivedData/Build/Products/Release-iphoneos/HubCuisine.app
 
-          find build/DerivedData \
-            -type d \
-            -name "*.app" \
-            -print
-            
       - name: Préparer l’IPA
+        shell: bash
         run: |
           set -euo pipefail
 
-          echo "=== Création de l'IPA non signée ==="
-
           APP_PATH="build/DerivedData/Build/Products/Release-iphoneos/HubCuisine.app"
-
-          test -d "$APP_PATH"
 
           rm -rf build/Payload
           mkdir -p build/Payload
-
           cp -R "$APP_PATH" build/Payload/
 
-          cd build
-          /usr/bin/zip -qry HubCuisine-unsigned.ipa Payload
-          shasum -a 256 HubCuisine-unsigned.ipa > HubCuisine-unsigned.sha256
-          cd ..
-
-          echo "=== Vérification ==="
+          (
+            cd build
+            /usr/bin/zip -qry HubCuisine-unsigned.ipa Payload
+            shasum -a 256 HubCuisine-unsigned.ipa > HubCuisine-unsigned.sha256
+          )
 
           test -f build/HubCuisine-unsigned.ipa
           ls -lh build/HubCuisine-unsigned.ipa
           cat build/HubCuisine-unsigned.sha256
+
       - name: Fournir Hub Cuisine
         uses: actions/upload-artifact@v7
         with:
           name: HubCuisine-IPA-a-signer
           path: |
-            build-input/HubCuisine_GitHub/build/HubCuisine-unsigned.ipa
-            build-input/HubCuisine_GitHub/build/HubCuisine-unsigned.sha256
-            build-input/HubCuisine_GitHub/INSTALLATION_IPAD.md
-            build-input/HubCuisine_GitHub/RENOUVELLEMENT_AUTO.md
+            build/HubCuisine-unsigned.ipa
+            build/HubCuisine-unsigned.sha256
+            INSTALLATION_IPAD.md
+            RENOUVELLEMENT_AUTO.md
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
@@ -164,7 +132,7 @@ jobs:
         with:
           name: HubCuisine-journaux
           path: |
-            build-input/HubCuisine_GitHub/build/core-tests.log
-            build-input/HubCuisine_GitHub/build/xcodebuild.log
+            build/core-tests.log
+            build/xcodebuild.log
           if-no-files-found: ignore
           retention-days: 3
