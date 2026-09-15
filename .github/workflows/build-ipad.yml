@@ -16,63 +16,129 @@ concurrency:
 
 jobs:
   build:
-    # Standard hosted runners are free for public repositories.
-    # A private repository is deliberately skipped: no unverified paid quota use.
     if: ${{ github.event.repository.private == false }}
     runs-on: macos-15
-    timeout-minutes: 25
+    timeout-minutes: 30
+
     env:
       HOMEBREW_NO_AUTO_UPDATE: '1'
       HOMEBREW_NO_INSTALL_CLEANUP: '1'
+
     defaults:
       run:
         shell: bash
         working-directory: build-input/HubCuisine_GitHub
+
     steps:
-      - uses: actions/checkout@v7
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Décompresser le projet envoyé depuis l’iPad
+
+      - name: Décompresser Hub Cuisine
         working-directory: .
         run: |
           set -euo pipefail
+
           test -f HubCuisine_GitHub.zip
+
+          rm -rf build-input
+          mkdir -p build-input
+
           unzip -q HubCuisine_GitHub.zip -d build-input
+
           test -f build-input/HubCuisine_GitHub/BuildSupport/project.yml
-      - name: Préparer les outils Apple et le projet natif
+
+      - name: Préparer Xcode et le projet
         run: |
           set -euo pipefail
+
           mkdir -p build
+
+          echo "=== Xcode ==="
           xcodebuild -version
+
+          echo "=== Swift ==="
           xcrun swift --version
+
+          echo "=== XcodeGen ==="
           if ! command -v xcodegen >/dev/null 2>&1; then
             brew install xcodegen
           fi
+
           xcodegen --version
-          xcodegen generate --spec BuildSupport/project.yml --project BuildSupport
-          plutil -lint BuildSupport/Info.plist BuildSupport/HubCuisine.xcodeproj/project.pbxproj
+
+          echo "=== Génération du projet Xcode ==="
+          xcodegen generate \
+            --spec BuildSupport/project.yml \
+            --project BuildSupport
+
+          echo "=== Vérification des fichiers ==="
+          plutil -lint \
+            BuildSupport/Info.plist \
+            BuildSupport/HubCuisine.xcodeproj/project.pbxproj
+
+          echo "=== Préparation des tests ==="
           python3 BuildSupport/prepare_core_tests.py
-           - name: Tester la logique métier et les recettes initiales
+
+      - name: Tester la logique métier
         continue-on-error: true
         run: |
           set -euo pipefail
-          MACOSX_DEPLOYMENT_TARGET=10.15 xcrun swift test --package-path build/CorePackage --jobs 2 2>&1 | tee build/core-tests.log
-      - name: Compiler l’application iPad et iPhone
+
+          echo "Les tests Swift sont utiles mais ne doivent pas bloquer la compilation iOS."
+
+          MACOSX_DEPLOYMENT_TARGET=10.15 \
+          xcrun swift test \
+            --package-path build/CorePackage \
+            --jobs 2 \
+            2>&1 | tee build/core-tests.log
+
+      - name: Compiler Hub Cuisine pour iPhone et iPad
         run: |
           set -euo pipefail
+
+          echo "=== Compilation iOS ==="
+
           xcodebuild \
             -project BuildSupport/HubCuisine.xcodeproj \
             -scheme HubCuisine \
             -configuration Release \
+            -sdk iphoneos \
             -destination 'generic/platform=iOS' \
             -derivedDataPath build/DerivedData \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
-            build 2>&1 | tee build/xcodebuild.log
-      - name: Préparer le fichier IPA à signer sur l’appareil
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build \
+            2>&1 | tee build/xcodebuild.log
+
+          echo "=== Recherche de l'application compilée ==="
+
+          find build/DerivedData \
+            -type d \
+            -name "*.app" \
+            -print
+
+      - name: Préparer l’IPA
         run: |
           set -euo pipefail
+
+          echo "=== Création de l'IPA non signée ==="
+
           python3 BuildSupport/package_ipa.py
-      - name: Fournir le fichier d’installation
+
+          echo "=== Vérification ==="
+
+          test -f build/HubCuisine-unsigned.ipa
+
+          ls -lh build/HubCuisine-unsigned.ipa
+
+          if [ -f build/HubCuisine-unsigned.sha256 ]; then
+            cat build/HubCuisine-unsigned.sha256
+          fi
+
+      - name: Fournir Hub Cuisine
         uses: actions/upload-artifact@v7
         with:
           name: HubCuisine-IPA-a-signer
@@ -84,6 +150,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
+
       - name: Conserver les diagnostics
         if: always()
         uses: actions/upload-artifact@v7
