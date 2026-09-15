@@ -119,25 +119,32 @@ jobs:
             -type d \
             -name "*.app" \
             -print
-
+            
       - name: Préparer l’IPA
         run: |
           set -euo pipefail
 
           echo "=== Création de l'IPA non signée ==="
 
-          python3 BuildSupport/package_ipa.py
+          APP_PATH="build/DerivedData/Build/Products/Release-iphoneos/HubCuisine.app"
+
+          test -d "$APP_PATH"
+
+          rm -rf build/Payload
+          mkdir -p build/Payload
+
+          cp -R "$APP_PATH" build/Payload/
+
+          cd build
+          /usr/bin/zip -qry HubCuisine-unsigned.ipa Payload
+          shasum -a 256 HubCuisine-unsigned.ipa > HubCuisine-unsigned.sha256
+          cd ..
 
           echo "=== Vérification ==="
 
           test -f build/HubCuisine-unsigned.ipa
-
           ls -lh build/HubCuisine-unsigned.ipa
-
-          if [ -f build/HubCuisine-unsigned.sha256 ]; then
-            cat build/HubCuisine-unsigned.sha256
-          fi
-
+          cat build/HubCuisine-unsigned.sha256
       - name: Fournir Hub Cuisine
         uses: actions/upload-artifact@v7
         with:
