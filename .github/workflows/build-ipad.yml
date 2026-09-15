@@ -52,6 +52,7 @@ jobs:
           xcodegen generate --spec BuildSupport/project.yml --project BuildSupport
           plutil -lint BuildSupport/Info.plist BuildSupport/HubCuisine.xcodeproj/project.pbxproj
           python3 BuildSupport/prepare_core_tests.py
+          python3 -c 'from pathlib import Path; p=Path("build/CorePackage/Package.swift"); s=p.read_text(); p.write_text(s.replace("let package = Package(\n", "let package = Package(\n    platforms: [.macOS(.v10_15)],\n", 1))
       - name: Tester la logique métier et les recettes initiales
         run: |
           set -euo pipefail
