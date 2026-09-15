@@ -1,0 +1,580 @@
+[
+  {
+    "id": "gnocchi-marry-me",
+    "name": "Marry Me Chicken & Gnocchi",
+    "cat": "Plat",
+    "emoji": "🍗",
+    "img": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=80",
+    "time": 30,
+    "servings": 4,
+    "cost": 14,
+    "difficulty": "Facile",
+    "rating": 5,
+    "tags": [
+      "Poulet",
+      "Crémeux",
+      "Gnocchi",
+      "Favori"
+    ],
+    "ingredients": [
+      {
+        "name": "Blancs de poulet",
+        "qty": "680 g",
+        "group": "Viande"
+      },
+      {
+        "name": "Gnocchi",
+        "qty": "450 g",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Crème entière",
+        "qty": "240 ml",
+        "group": "Frais"
+      },
+      {
+        "name": "Bouillon de poulet",
+        "qty": "180 ml",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Tomates séchées",
+        "qty": "60 g",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Parmesan",
+        "qty": "50 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Épinards",
+        "qty": "30 g",
+        "group": "Légumes"
+      },
+      {
+        "name": "Ail",
+        "qty": "3 gousses",
+        "group": "Légumes"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Assaisonner",
+        "text": "Assaisonner le poulet avec sel, poivre, assaisonnement italien et paprika.",
+        "timer": 0
+      },
+      {
+        "title": "Dorer",
+        "text": "Faire chauffer l’huile et cuire le poulet 3 à 4 minutes par côté. Réserver.",
+        "timer": 8
+      },
+      {
+        "title": "Faire la sauce",
+        "text": "Faire revenir l’ail, puis ajouter crème, bouillon et concentré de tomate.",
+        "timer": 4
+      },
+      {
+        "title": "Cuire les gnocchi",
+        "text": "Ajouter gnocchi et tomates séchées. Couvrir environ 4 minutes.",
+        "timer": 4
+      },
+      {
+        "title": "Finaliser",
+        "text": "Ajouter épinards, parmesan, poulet et jus de citron. Mélanger puis servir.",
+        "timer": 0
+      }
+    ],
+    "nutrition": {
+      "cal": 620,
+      "prot": 42,
+      "carb": 48,
+      "fat": 28
+    },
+    "notes": "Ajoute un peu de piment doux si tu veux une sauce plus intense."
+  },
+  {
+    "id": "steak-echalote",
+    "name": "Steak sauce échalote",
+    "cat": "Plat",
+    "emoji": "🥩",
+    "img": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=1200&q=80",
+    "time": 45,
+    "servings": 2,
+    "cost": 18,
+    "difficulty": "Moyen",
+    "rating": 4,
+    "tags": [
+      "Bœuf",
+      "Four",
+      "Sauce"
+    ],
+    "ingredients": [
+      {
+        "name": "Pommes de terre grenaille",
+        "qty": "400 g",
+        "group": "Légumes"
+      },
+      {
+        "name": "Steaks de bifteck",
+        "qty": "2",
+        "group": "Viande"
+      },
+      {
+        "name": "Échalotes",
+        "qty": "3",
+        "group": "Légumes"
+      },
+      {
+        "name": "Crème liquide 30 %",
+        "qty": "150 ml",
+        "group": "Frais"
+      },
+      {
+        "name": "Beurre",
+        "qty": "20 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Ail",
+        "qty": "2 gousses",
+        "group": "Légumes"
+      },
+      {
+        "name": "Paprika",
+        "qty": "1 pincée",
+        "group": "Épices"
+      },
+      {
+        "name": "Persil frais",
+        "qty": "1 poignée",
+        "group": "Légumes"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Préparer les grenailles",
+        "text": "Laver les pommes de terre et les taillader entre deux baguettes.",
+        "timer": 5
+      },
+      {
+        "title": "Assaisonner",
+        "text": "Ajouter huile, paprika, herbes, sel et poivre.",
+        "timer": 0
+      },
+      {
+        "title": "Four",
+        "text": "Cuire à 200 °C pendant 20 à 30 minutes.",
+        "timer": 25
+      },
+      {
+        "title": "Steak",
+        "text": "Saisir les steaks au beurre avec ail et herbes. Réserver.",
+        "timer": 6
+      },
+      {
+        "title": "Sauce échalote",
+        "text": "Faire revenir les échalotes dans le jus, ajouter crème et persil, mijoter.",
+        "timer": 3
+      }
+    ],
+    "nutrition": {
+      "cal": 760,
+      "prot": 46,
+      "carb": 52,
+      "fat": 42
+    },
+    "notes": "Laisser reposer les steaks avant cuisson pour une meilleure tendreté."
+  },
+  {
+    "id": "cajun-alfredo",
+    "name": "Cajun Chicken Alfredo",
+    "cat": "Plat",
+    "emoji": "🍝",
+    "img": "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?auto=format&fit=crop&w=1200&q=80",
+    "time": 30,
+    "servings": 4,
+    "cost": 15,
+    "difficulty": "Facile",
+    "rating": 5,
+    "tags": [
+      "Poulet",
+      "Pâtes",
+      "Parmesan",
+      "Épicé"
+    ],
+    "ingredients": [
+      {
+        "name": "Poulet",
+        "qty": "4 pièces",
+        "group": "Viande"
+      },
+      {
+        "name": "Fettuccine",
+        "qty": "250 g",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Bouillon de poulet",
+        "qty": "250 ml",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Crème liquide",
+        "qty": "250 ml",
+        "group": "Frais"
+      },
+      {
+        "name": "Parmesan",
+        "qty": "250 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Ail",
+        "qty": "3 gousses",
+        "group": "Légumes"
+      },
+      {
+        "name": "Paprika fumé",
+        "qty": "2 c. à soupe",
+        "group": "Épices"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Épicer",
+        "text": "Assaisonner le poulet avec paprika fumé, ail, oignon, sel, poivre et cayenne.",
+        "timer": 0
+      },
+      {
+        "title": "Cuire",
+        "text": "Cuire le poulet environ 3 minutes de chaque côté puis réserver.",
+        "timer": 6
+      },
+      {
+        "title": "Sauce",
+        "text": "Ajouter beurre et ail, puis bouillon, crème, maïzena et parmesan.",
+        "timer": 6
+      },
+      {
+        "title": "Pâtes",
+        "text": "Cuire les fettuccine et les mélanger à la sauce.",
+        "timer": 10
+      },
+      {
+        "title": "Servir",
+        "text": "Servir avec le poulet tranché et du persil.",
+        "timer": 0
+      }
+    ],
+    "nutrition": {
+      "cal": 690,
+      "prot": 48,
+      "carb": 58,
+      "fat": 31
+    },
+    "notes": "Garde un peu d’eau de cuisson pour détendre la sauce."
+  },
+  {
+    "id": "panini-express",
+    "name": "Panini Express",
+    "cat": "Petit creux",
+    "emoji": "🥪",
+    "img": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=80",
+    "time": 20,
+    "servings": 1,
+    "cost": 5,
+    "difficulty": "Très facile",
+    "rating": 4,
+    "tags": [
+      "Rapide",
+      "Fromage",
+      "Viande"
+    ],
+    "ingredients": [
+      {
+        "name": "Oignon",
+        "qty": "1",
+        "group": "Légumes"
+      },
+      {
+        "name": "Viande hachée",
+        "qty": "200 g",
+        "group": "Viande"
+      },
+      {
+        "name": "Crème liquide",
+        "qty": "100 ml",
+        "group": "Frais"
+      },
+      {
+        "name": "Fromage",
+        "qty": "100 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Fromage râpé",
+        "qty": "50 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Pâte à pizza",
+        "qty": "1",
+        "group": "Frais"
+      },
+      {
+        "name": "Ail",
+        "qty": "1 gousse",
+        "group": "Légumes"
+      },
+      {
+        "name": "Curry",
+        "qty": "1 pincée",
+        "group": "Épices"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Farce",
+        "text": "Faire revenir oignon, viande, ail, sel, poivre et curry.",
+        "timer": 6
+      },
+      {
+        "title": "Crémer",
+        "text": "Ajouter crème liquide et fromage, laisser mijoter 5 minutes.",
+        "timer": 5
+      },
+      {
+        "title": "Garnir",
+        "text": "Mettre fromage, farce et fromage râpé sur la pâte à pizza puis refermer.",
+        "timer": 0
+      },
+      {
+        "title": "Griller",
+        "text": "Cuire à la machine à panini ou au grill.",
+        "timer": 5
+      }
+    ],
+    "nutrition": {
+      "cal": 780,
+      "prot": 42,
+      "carb": 62,
+      "fat": 38
+    },
+    "notes": "Possible aussi au grill ou à la poêle avec un poids dessus."
+  },
+  {
+    "id": "bruschetta",
+    "name": "Bruschetta tomate basilic",
+    "cat": "Entrée",
+    "emoji": "🥖",
+    "img": "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=1200&q=80",
+    "time": 15,
+    "servings": 4,
+    "cost": 6,
+    "difficulty": "Très facile",
+    "rating": 4,
+    "tags": [
+      "Frais",
+      "Tomate",
+      "Rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Baguette",
+        "qty": "1",
+        "group": "Boulangerie"
+      },
+      {
+        "name": "Tomates",
+        "qty": "4",
+        "group": "Légumes"
+      },
+      {
+        "name": "Ail",
+        "qty": "1 gousse",
+        "group": "Légumes"
+      },
+      {
+        "name": "Basilic",
+        "qty": "1 poignée",
+        "group": "Légumes"
+      },
+      {
+        "name": "Huile d’olive",
+        "qty": "2 c. à soupe",
+        "group": "Épicerie"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Pain",
+        "text": "Couper et griller la baguette.",
+        "timer": 3
+      },
+      {
+        "title": "Tomates",
+        "text": "Couper les tomates, mélanger avec basilic, huile, sel et poivre.",
+        "timer": 5
+      },
+      {
+        "title": "Assembler",
+        "text": "Frotter le pain avec l’ail puis déposer les tomates.",
+        "timer": 0
+      }
+    ],
+    "nutrition": {
+      "cal": 210,
+      "prot": 6,
+      "carb": 32,
+      "fat": 8
+    },
+    "notes": "Ajoute de la mozzarella pour une version plus gourmande."
+  },
+  {
+    "id": "tiramisu",
+    "name": "Tiramisu spéculoos",
+    "cat": "Dessert",
+    "emoji": "🍰",
+    "img": "https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?auto=format&fit=crop&w=1200&q=80",
+    "time": 25,
+    "servings": 6,
+    "cost": 10,
+    "difficulty": "Facile",
+    "rating": 5,
+    "tags": [
+      "Frais",
+      "Spéculoos",
+      "Favori"
+    ],
+    "ingredients": [
+      {
+        "name": "Mascarpone",
+        "qty": "250 g",
+        "group": "Frais"
+      },
+      {
+        "name": "Œufs",
+        "qty": "3",
+        "group": "Frais"
+      },
+      {
+        "name": "Sucre",
+        "qty": "70 g",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Spéculoos",
+        "qty": "1 paquet",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Café",
+        "qty": "1 bol",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Cacao",
+        "qty": "1 c. à soupe",
+        "group": "Épicerie"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Crème",
+        "text": "Mélanger jaunes, sucre et mascarpone. Incorporer les blancs montés.",
+        "timer": 8
+      },
+      {
+        "title": "Biscuits",
+        "text": "Tremper les spéculoos dans le café.",
+        "timer": 0
+      },
+      {
+        "title": "Montage",
+        "text": "Alterner couches de crème et de biscuits.",
+        "timer": 0
+      },
+      {
+        "title": "Repos",
+        "text": "Laisser reposer au frais plusieurs heures.",
+        "timer": 180
+      }
+    ],
+    "nutrition": {
+      "cal": 410,
+      "prot": 7,
+      "carb": 36,
+      "fat": 27
+    },
+    "notes": "Meilleur après une nuit au frigo."
+  },
+  {
+    "id": "limonade",
+    "name": "Limonade maison",
+    "cat": "Boisson",
+    "emoji": "🍋",
+    "img": "https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=1200&q=80",
+    "time": 10,
+    "servings": 4,
+    "cost": 4,
+    "difficulty": "Très facile",
+    "rating": 4,
+    "tags": [
+      "Frais",
+      "Été",
+      "Rapide"
+    ],
+    "ingredients": [
+      {
+        "name": "Citrons",
+        "qty": "3",
+        "group": "Fruits"
+      },
+      {
+        "name": "Sucre",
+        "qty": "60 g",
+        "group": "Épicerie"
+      },
+      {
+        "name": "Eau pétillante",
+        "qty": "750 ml",
+        "group": "Boissons"
+      },
+      {
+        "name": "Menthe",
+        "qty": "1 poignée",
+        "group": "Légumes"
+      },
+      {
+        "name": "Glaçons",
+        "qty": "1 bac",
+        "group": "Surgelé"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Presser",
+        "text": "Presser les citrons.",
+        "timer": 0
+      },
+      {
+        "title": "Mélanger",
+        "text": "Mélanger avec le sucre puis ajouter l’eau pétillante.",
+        "timer": 0
+      },
+      {
+        "title": "Servir",
+        "text": "Ajouter menthe et glaçons.",
+        "timer": 0
+      }
+    ],
+    "nutrition": {
+      "cal": 90,
+      "prot": 0,
+      "carb": 22,
+      "fat": 0
+    },
+    "notes": "Possible avec du sirop de sucre de canne."
+  }
+]

@@ -1,0 +1,59 @@
+name: HubCuisine
+options:
+  minimumXcodeGenVersion: 2.42.0
+  deploymentTarget:
+    iOS: '17.0'
+  developmentLanguage: fr
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    IPHONEOS_DEPLOYMENT_TARGET: '17.0'
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    CLANG_ENABLE_MODULES: YES
+    MARKETING_VERSION: '1.0.0'
+    CURRENT_PROJECT_VERSION: '1'
+targets:
+  HubCuisine:
+    type: application
+    platform: iOS
+    deploymentTarget: '17.0'
+    sources:
+      - path: ../BrendonHubCuisine.swiftpm/Sources
+      - path: BundleModule.swift
+      - path: ../BrendonHubCuisine.swiftpm/Resources/Assets.xcassets
+        buildPhase: resources
+      - path: ../BrendonHubCuisine.swiftpm/Resources/LegacyRecipes.json
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: be.brendon.hubcuisine
+        PRODUCT_NAME: HubCuisine
+        TARGETED_DEVICE_FAMILY: '1,2'
+        SUPPORTS_MACCATALYST: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        LD_RUNPATH_SEARCH_PATHS:
+          - $(inherited)
+          - '@executable_path/Frameworks'
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: Hub Cuisine
+        CFBundleDevelopmentRegion: fr
+        CFBundleShortVersionString: '1.0.0'
+        CFBundleVersion: '1'
+        LSRequiresIPhoneOS: true
+        NSCameraUsageDescription: Photographier une recette ou un plat, uniquement à votre demande.
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        'UISupportedInterfaceOrientations~ipad':
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+          - UIInterfaceOrientationPortraitUpsideDown
+    scheme:
+      gatherCoverageData: false

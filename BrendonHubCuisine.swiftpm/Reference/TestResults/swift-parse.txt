@@ -1,0 +1,2 @@
+swift-frontend -parse : 19 fichiers Swift
+Code de sortie : 0

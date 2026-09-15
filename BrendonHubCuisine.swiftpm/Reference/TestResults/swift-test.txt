@@ -1,0 +1,53 @@
+[0/1] Planning build
+Building for debugging...
+[0/4] Write swift-version--19FCB341988BA456.txt
+[1/4] Write sources
+[4/5] Emitting module HubCuisineCore
+[5/6] Compiling HubCuisineCore RecipeLogic.swift
+[7/14] Emitting module HubCuisineCoreTests
+[8/15] Compiling HubCuisineCoreTests HubCuisineCoreTests.swift
+[9/16] Wrapping AST for HubCuisineCoreTests for debugging
+[10/16] /workspace/scratch/1aa70e55f309/.validation/build/x86_64-unknown-linux-gnu/debug/HubCuisineCorePackageDiscoveredTests.derived/all-discovered-tests.swift
+[11/17] Write sources
+[13/18] Emitting module HubCuisineCorePackageDiscoveredTests
+[14/20] Compiling HubCuisineCorePackageDiscoveredTests HubCuisineCoreTests.swift
+[15/20] Compiling HubCuisineCorePackageDiscoveredTests all-discovered-tests.swift
+[16/21] /workspace/scratch/1aa70e55f309/.validation/build/x86_64-unknown-linux-gnu/debug/HubCuisineCorePackageTests.derived/runner.swift
+[17/22] Wrapping AST for HubCuisineCorePackageDiscoveredTests for debugging
+[18/22] Write sources
+[20/23] Emitting module HubCuisineCorePackageTests
+[21/24] Compiling HubCuisineCorePackageTests runner.swift
+[22/24] Write Objects.LinkFileList
+[23/24] Linking HubCuisineCorePackageTests.xctest
+Build complete! (3.21s)
+Test Suite 'All tests' started at 2026-09-15 09:50:25.431
+Test Suite 'debug.xctest' started at 2026-09-15 09:50:25.436
+Test Suite 'HubCuisineCoreTests' started at 2026-09-15 09:50:25.436
+Test Case 'HubCuisineCoreTests.testBundledRecipes' started at 2026-09-15 09:50:25.436
+Test Case 'HubCuisineCoreTests.testBundledRecipes' passed (0.017 seconds)
+Test Case 'HubCuisineCoreTests.testCriticalScenarios' started at 2026-09-15 09:50:25.453
+PASS — Recherche et filtres combinés
+PASS — Portions et fractions
+PASS — Fusion de quantités compatibles
+PASS — Planning unique et courses proportionnelles
+PASS — Dates de semaine et changement d’année
+PASS — Import texte français
+PASS — Import JSON-LD imbriqué
+PASS — Échec d’import explicite
+PASS — Démonstration insérée une seule fois
+PASS — Sauvegarde complète aller-retour
+PASS — Doublon et variante indépendante
+PASS — Minuteur après interruption
+PASS — Garde-manger : quantités et produits périmés
+PASS — Garde-manger : stock partagé entre deux lignes
+PASS — Refus d’une sauvegarde incohérente
+Test Case 'HubCuisineCoreTests.testCriticalScenarios' passed (0.009 seconds)
+Test Suite 'HubCuisineCoreTests' passed at 2026-09-15 09:50:25.462
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.026 (0.026) seconds
+Test Suite 'debug.xctest' passed at 2026-09-15 09:50:25.462
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.026 (0.026) seconds
+Test Suite 'All tests' passed at 2026-09-15 09:50:25.462
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.026 (0.026) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.0.3 (18c42c19cac3faf)
+✔ Test run with 0 tests passed after 0.001 seconds.

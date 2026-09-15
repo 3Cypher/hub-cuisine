@@ -1,0 +1,9 @@
+build/
+**/.build/
+**/xcuserdata/
+BuildSupport/HubCuisine.xcodeproj/
+BuildSupport/Info.plist
+.DS_Store
+*.mobileprovision
+*.p12
+*.p8
