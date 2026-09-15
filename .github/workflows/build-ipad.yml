@@ -1,0 +1,95 @@
+name: Compiler Hub Cuisine pour iPad
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'HubCuisine_GitHub.zip'
+      - '.github/workflows/build-ipad.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hub-cuisine-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Standard hosted runners are free for public repositories.
+    # A private repository is deliberately skipped: no unverified paid quota use.
+    if: ${{ github.event.repository.private == false }}
+    runs-on: macos-15
+    timeout-minutes: 25
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+      HOMEBREW_NO_INSTALL_CLEANUP: '1'
+    defaults:
+      run:
+        shell: bash
+        working-directory: build-input/HubCuisine_GitHub
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Décompresser le projet envoyé depuis l’iPad
+        working-directory: .
+        run: |
+          set -euo pipefail
+          test -f HubCuisine_GitHub.zip
+          unzip -q HubCuisine_GitHub.zip -d build-input
+          test -f build-input/HubCuisine_GitHub/BuildSupport/project.yml
+      - name: Préparer les outils Apple et le projet natif
+        run: |
+          set -euo pipefail
+          mkdir -p build
+          xcodebuild -version
+          xcrun swift --version
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+          xcodegen --version
+          xcodegen generate --spec BuildSupport/project.yml --project BuildSupport
+          plutil -lint BuildSupport/Info.plist BuildSupport/HubCuisine.xcodeproj/project.pbxproj
+          python3 BuildSupport/prepare_core_tests.py
+      - name: Tester la logique métier et les recettes initiales
+        run: |
+          set -euo pipefail
+          xcrun swift test --package-path build/CorePackage --jobs 2 2>&1 | tee build/core-tests.log
+      - name: Compiler l’application iPad et iPhone
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project BuildSupport/HubCuisine.xcodeproj \
+            -scheme HubCuisine \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
+            build 2>&1 | tee build/xcodebuild.log
+      - name: Préparer le fichier IPA à signer sur l’appareil
+        run: |
+          set -euo pipefail
+          python3 BuildSupport/package_ipa.py
+      - name: Fournir le fichier d’installation
+        uses: actions/upload-artifact@v7
+        with:
+          name: HubCuisine-IPA-a-signer
+          path: |
+            build-input/HubCuisine_GitHub/build/HubCuisine-unsigned.ipa
+            build-input/HubCuisine_GitHub/build/HubCuisine-unsigned.sha256
+            build-input/HubCuisine_GitHub/INSTALLATION_IPAD.md
+            build-input/HubCuisine_GitHub/RENOUVELLEMENT_AUTO.md
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+      - name: Conserver les diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: HubCuisine-journaux
+          path: |
+            build-input/HubCuisine_GitHub/build/core-tests.log
+            build-input/HubCuisine_GitHub/build/xcodebuild.log
+          if-no-files-found: ignore
+          retention-days: 3
